@@ -6,8 +6,8 @@ import InfoModal from './info-modal';
 import './header.css';
 
 export default class Header extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state={
             toggle: 'nav'
@@ -23,11 +23,12 @@ export default class Header extends React.Component{
     }
 
     render(){
+        console.log(this.props)
         if(this.state.toggle === 'nav'){
            return( 
                 <header>
                     <TopNav changeToInfo={e=>this.showInfo()} 
-                        emptyStore={e=>console.log('new game coming soon')}
+                        emptyStore={this.props.emptyStore}
                     />
                     <h1>HOT or COLD</h1>
                 </header>

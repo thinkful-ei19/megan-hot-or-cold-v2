@@ -26,12 +26,15 @@ export default class Game extends React.Component {
         });
       }
 
-      updateGuessesAfterSubmit(guess){
+      updateAfterSubmit(guess){
           const guessVal=parseInt(guess,10)
+          console.log(guessVal)
+
           if(isNaN(guessVal) ){
               this.setState({temp:'Please Enter a Valid Number'});
           }
-          if(guessVal>100){
+
+         else if(guessVal>100){
             this.setState({temp:'Please Enter A Number Between 1 and 100'});
         }
           else{
@@ -54,7 +57,7 @@ export default class Game extends React.Component {
                 feedback='Hot'
             }
             if(difference >= 1 && difference<= 9){
-                feedback='On Fire'
+                feedback='Catching Fire'
             }
             if(difference ===0){
                 feedback='You Got It! Let\'s Play Again'
@@ -73,15 +76,24 @@ export default class Game extends React.Component {
         }
       }
 
+    showInfoView(){
+        this.setState({toggle:'info'})
+    }
 
+    showNav(){
+        this.setState({toggle:'nav'})
+    }
 
     
    render(){ 
         return (
             <div>
-                <Header />
-                <GuessSection feedback={this.state.temp} 
-                    guessVal={val=>this.updateGuessesAfterSubmit(val)}
+                <Header 
+                    emptyStore={this.newGame.bind(this)}
+                />
+                <GuessSection 
+                    feedback={this.state.temp} 
+                    guessValToUpdate={val=>this.updateAfterSubmit(val)}
                 />
                 <GuessCount guessesToCount={this.state.guesses}/>
                 <GuessList guesses={this.state.guesses}/>
