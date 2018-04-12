@@ -3,8 +3,14 @@ import React from 'react';
 import './guess-form.css';
 
 export default function GuessForm(props) {
-    return (//onSubmit={}
-        <form >
+    return (
+        <form 
+            onSubmit={e=>{
+            e.preventDefault();
+            props.guessVal(e.target.userGuess.value);
+            e.target.userGuess.value=''
+          }
+        }>
             <input type="text" 
                 name="userGuess" 
                 id="userGuess"
